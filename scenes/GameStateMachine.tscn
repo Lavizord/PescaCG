@@ -1,0 +1,142 @@
+[gd_scene load_steps=14 format=3 uid="uid://0m1idds2yj5h"]
+
+[ext_resource type="Script" path="res://src/StateMachine/GameManager.cs" id="1_sn8ix"]
+[ext_resource type="Script" path="res://src/StateMachine/SimpleState.cs" id="1_y7t35"]
+[ext_resource type="Script" path="res://src/StateMachine/MenuState.cs" id="3_j1vti"]
+[ext_resource type="Script" path="res://src/StateMachine/SetUpState.cs" id="4_2tq7a"]
+[ext_resource type="Script" path="res://src/StateMachine/YearStartState.cs" id="5_v8y0u"]
+[ext_resource type="PackedScene" uid="uid://cwmkjt0judx1p" path="res://scenes/Card.tscn" id="6_0h0ai"]
+[ext_resource type="Script" path="res://src/StateMachine/OceanState.cs" id="6_vc06s"]
+[ext_resource type="Script" path="res://src/StateMachine/CaptureState.cs" id="7_bv4hg"]
+[ext_resource type="Script" path="res://src/StateMachine/LotaState.cs" id="8_rpv86"]
+[ext_resource type="Script" path="res://src/StateMachine/YearEndState.cs" id="9_b3t5p"]
+[ext_resource type="Script" path="res://src/StateMachine/EndGameState.cs" id="10_ngbtm"]
+[ext_resource type="PackedScene" uid="uid://buort10uvj0p4" path="res://scenes/Deck.tscn" id="11_lyryx"]
+[ext_resource type="PackedScene" uid="uid://bcemcmcy12gg7" path="res://scenes/Player.tscn" id="11_prs1a"]
+
+[node name="GameManagetStateMachine" type="Node"]
+script = ExtResource("1_sn8ix")
+
+[node name="States" type="Node" parent="."]
+
+[node name="SimpleState" type="Node" parent="States"]
+script = ExtResource("1_y7t35")
+
+[node name="MenuState" type="Node" parent="States"]
+script = ExtResource("3_j1vti")
+
+[node name="SetUpState" type="Node" parent="States"]
+script = ExtResource("4_2tq7a")
+
+[node name="YearStartState" type="Node" parent="States"]
+script = ExtResource("5_v8y0u")
+
+[node name="Control" type="Control" parent="States/YearStartState"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="VBoxContainer" type="VBoxContainer" parent="States/YearStartState/Control"]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="CenterContainer" type="CenterContainer" parent="States/YearStartState/Control/VBoxContainer"]
+layout_mode = 2
+
+[node name="PlayerName" type="Label" parent="States/YearStartState/Control/VBoxContainer/CenterContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+text = "PLACEHOLDER - PLAYER NAME"
+horizontal_alignment = 1
+
+[node name="HBoxContainer" type="HBoxContainer" parent="States/YearStartState/Control/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+
+[node name="CardChoiceContainer" type="GridContainer" parent="States/YearStartState/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_mode = 2
+size_flags_horizontal = 3
+columns = 3
+
+[node name="DeckContainer" type="GridContainer" parent="States/YearStartState/Control/VBoxContainer/HBoxContainer"]
+unique_name_in_owner = true
+layout_direction = 3
+layout_mode = 2
+size_flags_horizontal = 3
+mouse_filter = 2
+columns = 6
+
+[node name="CardBase" parent="States/YearStartState/Control/VBoxContainer/HBoxContainer/DeckContainer" instance=ExtResource("6_0h0ai")]
+layout_mode = 2
+
+[node name="ButtonContainer" type="HBoxContainer" parent="States/YearStartState/Control/VBoxContainer"]
+custom_minimum_size = Vector2(50, 75)
+layout_mode = 2
+alignment = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="States/YearStartState/Control/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="TradeCardBtn" type="Button" parent="States/YearStartState/Control/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "Escolhe (1) e troca por (1) do teu deck."
+
+[node name="MarginContainer3" type="MarginContainer" parent="States/YearStartState/Control/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="AddCardsBtn" type="Button" parent="States/YearStartState/Control/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+text = "Add Cards to Deck (3)."
+
+[node name="MarginContainer2" type="MarginContainer" parent="States/YearStartState/Control/VBoxContainer/ButtonContainer"]
+layout_mode = 2
+size_flags_horizontal = 3
+
+[node name="OceanState" type="Node" parent="States"]
+script = ExtResource("6_vc06s")
+
+[node name="CaptureState" type="Node" parent="States"]
+script = ExtResource("7_bv4hg")
+
+[node name="LotaState" type="Node" parent="States"]
+script = ExtResource("8_rpv86")
+
+[node name="YearEndState" type="Node" parent="States"]
+script = ExtResource("9_b3t5p")
+
+[node name="EndGameState" type="Node" parent="States"]
+script = ExtResource("10_ngbtm")
+
+[node name="AudioManager" type="Node" parent="."]
+
+[node name="GameData" type="Node" parent="."]
+
+[node name="PlayerContainer" type="Node" parent="GameData"]
+unique_name_in_owner = true
+
+[node name="Player" parent="GameData/PlayerContainer" instance=ExtResource("11_prs1a")]
+
+[node name="Player2" parent="GameData/PlayerContainer" instance=ExtResource("11_prs1a")]
+
+[node name="Player3" parent="GameData/PlayerContainer" instance=ExtResource("11_prs1a")]
+
+[node name="Player4" parent="GameData/PlayerContainer" instance=ExtResource("11_prs1a")]
+
+[node name="FishCards" parent="GameData" instance=ExtResource("11_lyryx")]
+unique_name_in_owner = true
+
+[node name="ToolCards" parent="GameData" instance=ExtResource("11_lyryx")]
+unique_name_in_owner = true
+
+[connection signal="pressed" from="States/YearStartState/Control/VBoxContainer/ButtonContainer/TradeCardBtn" to="States/YearStartState" method="OnTradeCardButtonPressed"]
+[connection signal="pressed" from="States/YearStartState/Control/VBoxContainer/ButtonContainer/AddCardsBtn" to="States/YearStartState" method="OnAddCardBtnPressed"]

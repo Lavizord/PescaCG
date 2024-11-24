@@ -1,0 +1,22 @@
+[gd_scene load_steps=3 format=3 uid="uid://bcemcmcy12gg7"]
+
+[ext_resource type="Script" path="res://src/Player.cs" id="1_q6apo"]
+[ext_resource type="PackedScene" uid="uid://buort10uvj0p4" path="res://scenes/Deck.tscn" id="2_paglb"]
+
+[node name="Player" type="Node"]
+script = ExtResource("1_q6apo")
+
+[node name="Deck" parent="." instance=ExtResource("2_paglb")]
+unique_name_in_owner = true
+
+[node name="Hand" parent="." instance=ExtResource("2_paglb")]
+unique_name_in_owner = true
+
+[node name="Discard" parent="." instance=ExtResource("2_paglb")]
+unique_name_in_owner = true
+
+[node name="Ocean" parent="." instance=ExtResource("2_paglb")]
+unique_name_in_owner = true
+
+[node name="Boat" parent="." instance=ExtResource("2_paglb")]
+unique_name_in_owner = true
